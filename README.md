@@ -2,6 +2,8 @@
 
 Fabulous GitLab UI
 
+## Comparison
+
 [Screencast from 2026-09-09 15-22-15.webm](https://github.com/user-attachments/assets/f924951b-bcdc-48d8-97ec-ac569649658e)
 
 ## Installation
