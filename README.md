@@ -2,7 +2,7 @@
 
 Fabulous GitLab UI
 
-[Screencast from 2026-09-09 15-21-20.webm](https://github.com/user-attachments/assets/ad3a6d05-e819-4470-a25a-5417f8f7df43)
+[Screencast from 2026-09-09 15-22-15.webm](https://github.com/user-attachments/assets/f924951b-bcdc-48d8-97ec-ac569649658e)
 
 ## Installation
 
