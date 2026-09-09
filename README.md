@@ -1,6 +1,8 @@
 # GitFab
 
-Better GitLab UI.
+Better GitLab UI
+
+[Screencast from 2026-09-09 13-47-35.webm](https://github.com/user-attachments/assets/b0046c46-853d-4a1c-9dc1-30efc8126f5f)
 
 ## Installation
 
