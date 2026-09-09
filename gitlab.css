@@ -1,0 +1,241 @@
+button[data-testid="merge-button"] {
+  --brand: oklch(49.1% 0.122 154);
+  --up: 0.235;
+  --down: 0.111;
+  --a-edge: 0.85;
+  --a-glow: 0.55;
+
+  --pop: 0.06;
+  --tilt: 2.5deg;
+  --lean: 8deg;
+
+  --line-w: 1px;
+  --ring-w: 4px;
+  --lift-d: 5px;
+
+  --t-react: 0.28s;
+  --loop-idle: 3s;
+  --loop-sweep: 2.6s;
+
+  --c-lite: oklch(from var(--brand) calc(l + var(--up)) calc(c * 1.33) h);
+  --c-core: var(--brand);
+  --c-deep: oklch(from var(--brand) calc(l - var(--down)) calc(c * 0.74) h);
+  --c-line: oklch(
+    from var(--brand) calc(l + var(--up) * 1.53) calc(c * 0.84) h
+  );
+  --c-text: #fff;
+  --glow: oklch(from var(--brand) l c h / var(--a-glow));
+  --ring-c: oklch(from var(--brand) l c h / calc(var(--a-glow) * 0.4));
+  --grad-mid: 45%;
+
+  --bevel-top: rgb(255 255 255 / var(--a-edge));
+  --bevel-side: rgb(255 255 255 / calc(var(--a-edge) * 0.4));
+  --bevel-bottom: rgb(0 0 0 / calc(var(--a-edge) * 0.53));
+  --lit: rgb(255 255 255 / calc(var(--a-edge) * 0.82));
+  --shade: rgb(0 0 0 / calc(var(--a-edge) * 0.35));
+  --sink: rgb(0 0 0 / calc(var(--a-edge) * 0.53));
+  --shine-c: rgb(255 255 255 / calc(var(--a-edge) * 0.95));
+
+  --inner-lit: inset 0 var(--line-w) 0 var(--lit);
+  --inner-shade: inset 0 calc(var(--lift-d) * -1.2) calc(var(--lift-d) * 2.8)
+    var(--shade);
+  --inner-press: inset 0 calc(var(--lift-d) * 0.6) calc(var(--lift-d) * 1.6)
+    var(--sink);
+  --line: 0 0 0 var(--line-w) var(--c-line);
+  --line-hover: 0 0 0 var(--line-w) #fff;
+  --ring: 0 0 0 var(--ring-w) var(--ring-c);
+  --ring-hover: 0 0 0 calc(var(--ring-w) * 2) var(--ring-c);
+  --lift: 0 var(--lift-d) calc(var(--lift-d) * 2.4) var(--glow);
+  --lift-high: 0 calc(var(--lift-d) * 2.4) calc(var(--lift-d) * 4.8) var(--glow);
+  --lift-low: 0 calc(var(--lift-d) * 0.4) calc(var(--lift-d) * 1.2) var(--glow);
+
+  --shadow-rest:
+    var(--inner-lit), var(--inner-shade), var(--line), var(--ring), var(--lift);
+  --shadow-hover:
+    var(--inner-lit), var(--inner-shade), var(--line-hover), var(--ring-hover),
+    var(--lift-high);
+  --shadow-press: var(--inner-press), var(--line), var(--lift-low);
+
+  --hover-scale: calc(1 + var(--pop));
+  --press-scale: calc(1 - var(--pop));
+  --calm-scale: calc(1 + var(--pop) / 2);
+  --jolt-in-scale: calc(1 - var(--pop) * 2);
+  --jolt-out-scale: calc(1 + var(--pop) / 3);
+  --hover-tilt: calc(var(--tilt) * -1);
+  --press-tilt: calc(var(--tilt) * 0.8);
+  --idle-tilt: calc(var(--tilt) * 0.4);
+  --jolt-in-tilt: calc(var(--tilt) * -1.6);
+  --jolt-out-tilt: calc(var(--tilt) * 1.2);
+  --hover-lean: var(--lean);
+  --press-lean: calc(var(--lean) * 2);
+  --depth: 900px;
+  --depth-text: 600px;
+  --text-lift: 20px;
+
+  --t-press: calc(var(--t-react) / 4);
+  --t-calm: calc(var(--t-react) / 3);
+  --t-ripple-move: calc(var(--t-react) * 2.3);
+  --t-ripple-fade: calc(var(--t-react) * 3.2);
+  --ease-pop: cubic-bezier(0.2, 1.6, 0.4, 1);
+
+  --shine-w: 55%;
+  --shine-bleed: -60%;
+  --shine-end: calc(100% - var(--shine-bleed) / 2);
+  --shine-angle: 22deg;
+
+  --ripple-size: 18px;
+  --ripple-scale: 16;
+  --ripple-fade: 70%;
+  --ripple-peak: 0.75;
+
+  --focus-c: #fff;
+  --focus-w: calc(var(--line-w) * 2);
+  --focus-offset: calc(var(--line-w) * 3);
+  --filter-hover: saturate(1.25) brightness(1.12);
+
+  position: relative;
+  overflow: hidden;
+  border-color: var(--bevel-top) var(--bevel-side) var(--bevel-bottom);
+
+  background-color: var(--c-deep);
+  background-image: linear-gradient(
+    180deg,
+    var(--c-lite),
+    var(--c-core) var(--grad-mid),
+    var(--c-deep)
+  );
+  background-origin: border-box;
+  background-clip: border-box;
+  box-shadow: var(--shadow-rest);
+
+  perspective: var(--depth-text);
+  transform-style: preserve-3d;
+  transition:
+    transform var(--t-react) var(--ease-pop),
+    box-shadow var(--t-react) ease,
+    filter var(--t-react) ease;
+  animation: idle-tilt var(--loop-idle) ease-in-out infinite;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: var(--shine-bleed) auto var(--shine-bleed) var(--shine-bleed);
+    width: var(--shine-w);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--shine-c),
+      transparent
+    );
+    transform: rotate(var(--shine-angle));
+    animation: sweep var(--loop-sweep) ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: var(--ripple-size);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(circle, #fff, transparent var(--ripple-fade));
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(var(--ripple-scale));
+    transition:
+      transform var(--t-ripple-move) ease-out,
+      opacity var(--t-ripple-fade) ease-out;
+    pointer-events: none;
+  }
+
+  & .gl-button-text {
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    color: var(--c-text);
+    text-shadow: 0 var(--line-w) 0 var(--sink);
+    transition: transform var(--t-react) var(--ease-pop);
+  }
+
+  &:is(:hover, :focus-visible) {
+    transform: perspective(var(--depth)) scale(var(--hover-scale))
+      rotate(var(--hover-tilt)) rotateX(var(--hover-lean));
+    filter: var(--filter-hover);
+    box-shadow: var(--shadow-hover);
+    animation: none;
+
+    & .gl-button-text {
+      transform: translateZ(var(--text-lift));
+    }
+  }
+
+  &:focus-visible {
+    outline: var(--focus-w) solid var(--focus-c);
+    outline-offset: var(--focus-offset);
+  }
+
+  &:active {
+    transform: perspective(var(--depth)) scale(var(--press-scale))
+      rotate(var(--press-tilt)) rotateX(var(--press-lean));
+    transition-duration: var(--t-press);
+    box-shadow: var(--shadow-press);
+    animation: jolt var(--t-react) ease-out;
+
+    &::after {
+      transform: translate(-50%, -50%) scale(0);
+      opacity: var(--ripple-peak);
+      transition: 0s;
+    }
+    & .gl-button-text {
+      transform: scale(var(--press-scale));
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &,
+    &::before,
+    &::after {
+      animation: none;
+    }
+    & {
+      transition-duration: var(--t-calm);
+    }
+    &:hover {
+      transform: scale(var(--calm-scale));
+    }
+  }
+}
+
+@keyframes sweep {
+  0%,
+  100% {
+    left: var(--shine-bleed);
+  }
+  55% {
+    left: var(--shine-end);
+  }
+}
+
+@keyframes idle-tilt {
+  0%,
+  100% {
+    transform: rotate(calc(var(--idle-tilt) * -1));
+  }
+  50% {
+    transform: rotate(var(--idle-tilt));
+  }
+}
+
+@keyframes jolt {
+  0% {
+    transform: scale(var(--jolt-in-scale)) rotate(var(--jolt-in-tilt));
+  }
+  55% {
+    transform: scale(var(--jolt-out-scale)) rotate(var(--jolt-out-tilt));
+  }
+  100% {
+    transform: perspective(var(--depth)) scale(var(--press-scale))
+      rotate(var(--press-tilt)) rotateX(var(--press-lean));
+  }
+}
