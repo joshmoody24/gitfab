@@ -51,6 +51,19 @@ svg[data-testid^="status_running" i] {
 
 /* Merge button */
 
+/* Kill GitLab's shimmer layer behind the merge button */
+.btn-group:has(> button[data-testid="merge-button"]) {
+  background: none !important;
+  box-shadow: none !important;
+  border-color: transparent !important;
+  animation: none !important;
+
+  &::before,
+  &::after {
+    content: none !important;
+  }
+}
+
 button[data-testid="merge-button"] {
   --brand: oklch(49.1% 0.122 154);
   --up: 0.235;
@@ -201,7 +214,9 @@ button[data-testid="merge-button"] {
     transition: transform var(--t-react) var(--ease-pop);
   }
 
-  &:is(:hover, :focus-visible) {
+  /* Hover is triggered by the (untransformed) group so the hit area stays put */
+  :is(.btn-group:hover) > &,
+  &:focus-visible {
     scale: var(--hover-scale);
     transform: perspective(var(--depth)) rotateX(var(--hover-lean));
     filter: var(--filter-hover);
@@ -238,7 +253,7 @@ button[data-testid="merge-button"] {
     & {
       transition-duration: var(--t-calm);
     }
-    &:hover {
+    :is(.btn-group:hover) > & {
       scale: var(--calm-scale);
       transform: none;
     }
