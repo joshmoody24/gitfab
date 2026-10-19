@@ -128,6 +128,7 @@ button[data-testid="merge-button"] {
   --hover-lean: var(--lean);
   --press-lean: calc(var(--lean) * 2);
   --depth: 900px;
+  --z-lift: 12px;
 
   --t-press: calc(var(--t-react) / 4);
   --t-calm: calc(var(--t-react) / 3);
@@ -218,7 +219,8 @@ button[data-testid="merge-button"] {
   :is(.btn-group:hover) > &,
   &:focus-visible {
     scale: var(--hover-scale);
-    transform: perspective(var(--depth)) rotateX(var(--hover-lean));
+    transform: perspective(var(--depth)) translateZ(var(--z-lift))
+      rotateX(var(--hover-lean));
     filter: var(--filter-hover);
     box-shadow: var(--shadow-hover);
   }
@@ -230,7 +232,8 @@ button[data-testid="merge-button"] {
 
   &:active {
     scale: var(--press-scale);
-    transform: perspective(var(--depth)) rotateX(var(--press-lean));
+    transform: perspective(var(--depth)) translateZ(var(--z-lift))
+      rotateX(var(--press-lean));
     transition-duration: var(--t-press);
     box-shadow: var(--shadow-press);
 
